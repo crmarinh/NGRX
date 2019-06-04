@@ -2,10 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { MultiplicarComponent } from './multiplicar/multiplicar.component';
+import { DividirComponent } from './dividir/dividir.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MultiplicarComponent,
+    DividirComponent
   ],
   imports: [
     BrowserModule
