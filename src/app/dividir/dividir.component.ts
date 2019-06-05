@@ -1,4 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from '../store/store';
+import { DividirAction } from '../store/reducers';
 
 @Component({
   selector: 'app-dividir',
@@ -6,16 +9,15 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./dividir.component.css']
 })
 export class DividirComponent {
-  @Input() numero: number;
-  @Output() dividir: EventEmitter<number>;
+  numero: number;
 
-  constructor() {
-    this.numero = 0;
-    this.dividir = new EventEmitter();
+  constructor(private storeAritmetica: Store<AppState>) {
+    this.storeAritmetica.select('aritmetica').subscribe(respuesta => {
+      this.numero = respuesta;
+    });
   }
 
   dividiendo() {
-    this.numero = this.numero / 2;
-    this.dividir.emit(this.numero);
+    this.storeAritmetica.dispatch(new DividirAction());
   }
 }

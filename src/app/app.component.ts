@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from './store/store';
+import { SumarAction, RestarAction } from './store/reducers';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +12,18 @@ export class AppComponent {
   title = 'NGRX';
   numero: number;
 
-  constructor() {
-    this.numero = 0;
+  constructor(private storeAritmetica: Store<AppState>) {
+    this.storeAritmetica.select('aritmetica').subscribe(respuesta => {
+      this.numero = respuesta;
+    });
   }
 
-  multiplicar($event) {
-    this.numero = $event;
+  sumar() {
+    this.storeAritmetica.dispatch(new SumarAction());
+  }
+
+  restar() {
+    this.storeAritmetica.dispatch(new RestarAction());
   }
 
 }

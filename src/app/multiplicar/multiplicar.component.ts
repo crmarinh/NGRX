@@ -1,4 +1,7 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from '../store/store';
+import { MultiplicarAction } from '../store/reducers';
 
 @Component({
   selector: 'app-multiplicar',
@@ -7,22 +10,16 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class MultiplicarComponent {
 
-  @Input() numero: number;
-  @Output() multiplicar: EventEmitter<number>;
+  numero: number;
 
-  constructor() {
-    this.numero = 1;
-    this.multiplicar = new EventEmitter();
+  constructor(private storeAritmetica: Store<AppState>) {
+    this.storeAritmetica.select('aritmetica').subscribe(respuesta => {
+      this.numero = respuesta;
+    });
    }
 
    multiplico() {
-     this.numero = this.numero * 2;
-     this.multiplicar.emit(this.numero);
-   }
-
-   dividir($event) {
-     this.numero = $event;
-     this.multiplicar.emit(this.numero);
+    this.storeAritmetica.dispatch(new MultiplicarAction());
    }
 
 }

@@ -9,9 +9,9 @@
 </div>
 
 <div class="text-center">
-  <button type="button" class="btn btn-outline-primary margin" (click)="numero = numero + 1">sumar</button>
+  <button type="button" class="btn btn-outline-primary margin" (click)="sumar()">sumar</button>
   {{ numero }}
-  <button type="button" class="btn btn-outline-primary margin" (click)="numero = numero - 1">restar</button>
+  <button type="button" class="btn btn-outline-primary margin" (click)="restar()">restar</button>
 </div>
 
-<app-multiplicar [numero]="numero" (multiplicar)="multiplicar($event)"></app-multiplicar>
+<app-multiplicar></app-multiplicar>
