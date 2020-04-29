@@ -1,10 +1,10 @@
 import { ActionReducerMap } from '@ngrx/store';
-import { reducerAritmetica } from './reducers';
+import { aritmeticaReducer, Aritmetica } from './reducers';
 
 export interface AppState {
-  aritmetica: number;
+  aritmetica: Aritmetica;
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
-  aritmetica: reducerAritmetica
+  aritmetica: aritmeticaReducer
 };

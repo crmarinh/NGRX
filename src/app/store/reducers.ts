@@ -1,43 +1,24 @@
-import { Action } from '@ngrx/store';
+import {createAction, createReducer, on } from '@ngrx/store';
 
 // Acciones
-export const SUMAR = '[Sumar] sumar uno a un numero';
-export const RESTAR = '[Restar] restar uno a un numero';
-export const MULTIPLICAR = '[MULTIPLICAR] Multiplicar por dos';
-export const DIVIDIR = '[DIVIDIR] Dividir en dos';
+export const sumar = createAction('[Sumar] sumar uno a un numero');
+export const restar = createAction('[Restar] restar uno a un numero');
+export const multiplicar = createAction('[MULTIPLICAR] Multiplicar por dos');
+export const dividir = createAction('[DIVIDIR] Dividir en dos')
 
-export class SumarAction implements Action {
-  type = SUMAR;
+export interface Aritmetica {
+  value: number
 }
 
-export class RestarAction implements Action {
-  type = RESTAR;
+const initialstate: Aritmetica = {
+  value: 0
 }
 
-export class MultiplicarAction implements Action {
-    type = MULTIPLICAR;
-}
-
-export class DividirAction implements Action {
-    type = DIVIDIR;
-}
+const _aritmeticaReducer = createReducer(initialstate, 
+  on(sumar, state => ({...state, value: state.value + 1})),
+  on(restar, state => ({...state, value: state.value - 1})),
+  on(multiplicar, state => ({...state, value: state.value * 2})),
+  on(dividir, state => ({...state, value: state.value / 2})));
 
 
-type Acciones = SumarAction | RestarAction | MultiplicarAction | DividirAction;
-
-// Reducer
-export function reducerAritmetica(state: number = 2, accion: Acciones) {
-  if (accion.type === SUMAR) {
-    return (state = state + 1);
-  }
-  if (accion.type === RESTAR) {
-    return (state = state - 1);
-  }
-  if (accion.type === MULTIPLICAR) {
-      return state = state * 2;
-  }
-  if (accion.type === DIVIDIR) {
-      return state = state / 2;
-  }
-  return state;
-}
+export const aritmeticaReducer = (state, action) => _aritmeticaReducer(state,action);
